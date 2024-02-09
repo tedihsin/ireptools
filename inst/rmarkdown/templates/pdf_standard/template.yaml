@@ -1,0 +1,5 @@
+name: PDF Report (LuaLaTeX+jlreq)
+description: |
+  | PDFレポート生成用標準テンプレート
+  | LuaLatex + jlreqドキュメントクラス
+create_dir: FALSE

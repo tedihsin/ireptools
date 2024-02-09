@@ -1,0 +1,511 @@
+---
+output:
+  pdf_document:
+    keep_tex: no
+    latex_engine: lualatex
+    number_sections: yes
+    toc: false
+    toc_depth: 2
+    # 図の余白をクロップしない
+    fig_crop: false
+    ## pandocオプション
+    # markdown-auto_identifiers：pandocで見出しにID属性がつかないようにする
+    #     見出しが連続する場合の設定の際に余分なコマンドが入ると見出しの連続が判定できないため
+    # indent=true：段落頭のインデントを有効化する
+    #     pandocのデフォルトLatexテンプレートでは段落頭のインデントが入らない設定のようだ
+    #     強制インデントのパッケージで対応してきたがjlreqの箇条書き設定オプション等とも競合するため変更
+    pandoc_args: ['-r', 'markdown-auto_identifiers', '-V', 'indent=true'] 
+
+# ドキュメントクラスはjlreqを利用する
+# https://tug.org/docs/latex/jlreq/jlreq-ja.html
+documentclass: jlreq
+classoption: 
+  - lualatex # LaTeXエンジン
+  - paper = a4paper # 用紙サイズ
+  - fontsize = 10pt # 欧文基準フォントのサイズ
+  - jafontsize = 10pt # 和文基準フォントサイズ
+  - baselineskip = 1.4em # 行送り：行間+文字の高さ
+  - | # 組み方：行頭に来る役物を前行に追い込む（アンダーバーが入るので記法に注意）
+    `hanging_punctuation`{=latex}
+  # - titlepage # 表紙を別ページに分離：タイトルの書式を調整する必要がある
+
+subparagraph: yes
+
+# Knitボタン押下時のファイル名を修正
+## ファイル名＋日時
+# knit: (function(input, ...) {
+#   rmarkdown::render(
+#     input,
+#     output_file = stringr::str_c(
+#       xfun::sans_ext(input), '-', format(Sys.time(), "%Y-%m-%d_%H-%M-%S"), '.pdf'
+#     ),
+#     envir = globalenv()
+#   )
+#  })
+
+header-includes:
+  # ----------------------------------------------------------
+  # 紙面の余白設定
+  # geometryパッケージの読み込み：Documentclassでの設定より簡単
+  - \usepackage{geometry}
+  - \geometry{
+      top = 20truemm,
+      bottom = 20truemm,
+      left = 20truemm,
+      right = 20truemm,
+      footskip = 10truemm
+    }
+  ## classoptionで余白設定する場合のヘッダ・フッタの位置
+  ## オプションに「_」があるとPandocがエスケープするためパイプ記法で回避
+  # - |
+  #   `headfoot_verticalposition = 2zw`{=latex}
+  # ----------------------------------------------------------
+
+  # ----------------------------------------------------------
+  # 段落
+  ## - \usepackage{indentfirst}
+  # 段落頭を強制的に字下げするパッケージ（pandocのオプションで対応したので無効化）
+  # pandocのテンプレートが段落頭のインデントをデフォルトで無効化していたため利用していたが
+  # -V indent=tureで解決
+
+  ## 段落初めの字下げ量：2以上にしても1文字に変えられてしまう
+  ## したがって、ここでは実質的に字下げのOn/Offの設定となる
+  ## ただしプリアンブルではなく\begin{document}以降ならば2em以上でも設定できる
+  # - \setlength{\parindent}{1em}
+  
+  ## 段落間の余白
+  - \setlength{\parskip}{0.5em}
+  # ----------------------------------------------------------
+  
+  # ----------------------------------------------------------
+  # lualatexで日本語フォント等を設定するパッケージを読み込み
+  - \usepackage{luatexja-fontspec}
+  ## 欧文フォント
+  # 明朝系
+  - \setmainfont[
+      BoldFont = Noto Serif CJK JP Medium,
+      ItalicFont = Noto Serif CJK JP,
+      ItalicFeatures = {FakeSlant=0.33},
+      BoldItalicFont = Noto Serif CJK JP,
+      BoldItalicFeatures = {FakeBold=2, FakeSlant=0.33}
+    ]{Noto Serif CJK JP}
+
+  # ゴシック系
+  #- \setsansfont{Noto Sans CJK JP Light}
+  - \setsansfont[
+      BoldFont = Noto Sans CJK JP Medium,
+      ItalicFont = Noto Sans CJK JP,
+      ItalicFeatures = {FakeSlant=0.33},
+      BoldItalicFont = Noto Sans CJK JP,
+      BoldItalicFeatures = {FakeBold=2, FakeSlant=0.33}
+    ]{Noto Sans CJK JP}
+
+  ## 日本語フォント設定
+  # \setmainjfont と \setmainjfontで明朝、ゴシックをそれぞれ設定する
+  ## 例：
+  #- \setmainjfont[
+  #    ## フォントメトリック：jlreqを継承
+  #    YokoFeatures = {JFM=jlreq},
+  #    TateFeatures = {JFM=jlreqv},
+  #    ## Boldフォント
+  #    BoldFont = BIZ_UDGothic_Regular,
+  #    ## 疑似Boldにする場合の設定
+  #    # BoldFeatures = {FakeBold=2},
+  #    
+  #    ## イタリックフォント
+  #    ItalicFont = BIZ UDMincho Medium,
+  #    ## 疑似イタリックにする場合の設定
+  #    ItalicFeatures = {FakeSlant=0.33},
+  #    
+  #    ## イタリックBoldフォント
+  #    BoldItalicFont = BIZ UDMincho Medium,
+  #    ## 疑似イタリックBoldフォントにする場合
+  #    BoldItalicFeatures = {FakeBold=2, FakeSlant=0.33}
+  #  ]{BIZ UDMincho Medium}
+  ## 明朝フォント
+  - \setmainjfont[
+      YokoFeatures = {JFM=jlreq},
+      TateFeatures = {JFM=jlreqv},
+      BoldFont = Noto Sans CJK JP,
+      ItalicFont = Noto Serif CJK JP,
+      ItalicFeatures = {FakeSlant=0.33},
+      BoldItalicFont = Noto Serif CJK JP,
+      BoldItalicFeatures = {FakeBold=2, FakeSlant=0.33}
+    ]{Noto Serif CJK JP}
+
+  ## ゴシックフォント
+  - \setsansjfont[
+      YokoFeatures = {JFM=jlreq},
+      TateFeatures = {JFM=jlreq},
+      BoldFont = Noto Sans CJK JP Medium,
+      ItalicFont = Noto Sans CJK JP,
+      ItalicFeatures = {FakeSlant=0.33},
+      BoldItalicFont = Noto Sans CJK JP,
+      BoldItalicFeatures = {FakeBold=2, FakeSlant=0.33}
+    ]{Noto Sans CJK JP}
+  # ----------------------------------------------------------
+  
+  # ----------------------------------------------------------
+  # タイトル、著者、日付の書式設定をするパッケージ
+  ## 各要素の前後に挿入するコマンドを書くことで調整する
+  - \usepackage{titling}
+  ## タイトルの書式設定
+  - \pretitle{
+      \begin{center}\fontsize{13pt}{14.5pt}\selectfont\sffamily\bfseries
+    }
+  - \posttitle{
+      \par\end{center}\vspace{1.2em}
+    }
+  ## titlingパッケージはサブタイトルをサポートしないのでsubtitleを定義
+  ## posttitleにサブタイトルを配置する：上でタイトルの書式設定をした場合にコマンドの整合性に注意
+  ## [1]で引数を受け取り「#1」の位置にサブタイトルの文字を出力
+  ## 中央：center、右寄せ：flushright、左寄せ：flushleft
+  - \newcommand{\subtitle}[1]{
+      \posttitle{
+        \par\end{center}
+        \begin{center}\fontsize{12pt}{12pt}\selectfont#1\end{center}
+        \vspace{1.3em}
+      }
+    }
+
+  ## 著者と日付を右寄せ
+  - \preauthor{
+      \begin{flushright}\fontsize{10pt}{11pt}\selectfont
+    }
+  - \postauthor{
+      \par\end{flushright}
+    }
+  - \predate{
+      \begin{flushright}\fontsize{10pt}{11pt}\selectfont
+    }
+  - \postdate{
+      \par\end{flushright}
+    }
+
+  ## タイトル部分と本文の間を少し詰める  
+  - \renewcommand{\maketitlehookd}{
+      \vspace{-1em}
+    }
+
+  ## \maketitle部分の段落送りを0にする
+  ## \preauthor等で\parskipを設定すると文書全体に反映されるのでhookを利用
+  - \renewcommand{\maketitlehooka}{
+      \setlength{\parskip}{0em}
+    }
+  # タイトル、記名部分のレイアウト修正
+  # 冒頭の空白が大きいので少し余白を減らす
+  - \setlength{\droptitle}{-4em} 
+  # ----------------------------------------------------------
+
+
+  # ----------------------------------------------------------
+    # 見出し設定
+  ## サブセクションの表記を「1.1」からハイフン区切りに変更「1-1」
+  #- \renewcommand{\thesubsection}{\thesection--\arabic{subsection}}
+  
+  ## 見出しが連続した場合の前後の余白定義
+  # 章節項・章節・節項が連続する場合は見出し同士の余白を開けないようにする
+  # 同一レベルの見出し、レベルが隣接しない見出しは連続しないと想定し設定なし
+  - \SetBlockHeadingSpaces{
+      {
+        _section{before_lines = 1, after_lines = 0.1},
+        _subsection{before_lines = 0.1, after_lines = 0.1},
+        _subsubsection{before_lines = 0.1, after_lines = 0.15}
+      }
+      {
+        _section{before_lines = 1, after_lines = 0.1},
+        _subsection{before_lines = 0.1, after_lines = 0.15}
+      }
+      {
+        _subsection{before_lines = 0.5, after_lines = 0.05},
+        _subsubsection{before_lines = 0.05, after_lines = 0.15}
+      }
+    }
+  
+  ### -----
+  ## 通常の見出し定義
+  - \DeclareBlockHeading{section}{1}{
+      font={\fontsize{12pt}{12pt}\selectfont\sffamily\bfseries},
+      after_label_space = {0.5em},
+      before_lines = {1},
+      after_lines = {0.15},
+    }
+  - \DeclareBlockHeading{subsection}{2}{
+      font={\fontsize{11pt}{11pt}\selectfont\sffamily},
+      after_label_space = {0.5em},
+      before_lines = {0.7},
+      after_lines = {0.15},
+    }
+  - \DeclareBlockHeading{subsubsection}{3}{
+      font={\fontsize{11pt}{11pt}\selectfont\sffamily},
+      after_label_space = {0.5em},
+      before_lines = {0.5},
+      after_lines = {0.15},
+    }
+  
+  ### -----
+  ## 見出しを黒帯＋白抜き文字に
+  # - \DeclareBlockHeading{section}{1}
+  #   {
+  #     font={\fontsize{12pt}{12pt}\selectfont\sffamily\bfseries\color{white}},
+  #     format={\colorbox[named]{black}{\parbox{\textwidth}{\raisebox{0mm}{#1#2}}}},
+  #     after_label_space = {0.1em},
+  #     before_lines = {1},
+  #     after_lines = {0.3},
+  #   }
+  # - \DeclareBlockHeading{subsection}{2}
+  #   {
+  #     font={\fontsize{12pt}{12pt}\selectfont\sffamily},
+  #     after_label_space = {0.1em},
+  #     before_lines = {0.7},
+  #     after_lines = {0.15},
+  #   }
+  # - \DeclareBlockHeading{subsubsection}{3}
+  #   {
+  #     font={\fontsize{11pt}{11pt}\selectfont\sffamily},
+  #     after_label_space = {0.1em},
+  #     before_lines = {0.5},
+  #     after_lines = {0.15},
+  #   }
+  ### -----
+  
+  # 章番号の後ろに「.」を追加するパッケージ
+  ## titleformatを利用する場合は無効となる：フォーマット側で指定する
+  - \usepackage{secdot}
+  # セクション番号に「.」を追加
+  - \sectiondot{section}
+  - \sectiondot{subsection}
+  - \sectiondot{subsubsection}
+  # セクション番号のフォーマットを変更するとき
+  #- \renewcommand{\thesection}{\arabic{section}}
+  # ----------------------------------------------------------
+
+  # ----------------------------------------------------------
+  # 箇条書きの記号を変更
+  #- \renewcommand{\labelitemi}{■}
+  - \renewcommand{\labelitemii}{$\circ$}
+  # ----------------------------------------------------------
+
+
+  # ----------------------------------------------------------
+  # 箇条書きの設定
+  ## itemization_itemsep = {0.5em} # 要素同士の縦間隔
+  ## itemization_label_length = {2em} # 各レベルのインデント幅（インデント＋マーク）
+  ## itemization_labelsep = {0.5em} # マークから文字列までの幅
+  - \jlreqsetup{
+      itemization_itemsep = {0.5em},
+      itemization_label_length = {2em},
+      itemization_labelsep = {0.5em},
+    }
+    
+  # ぶら下げのインデント量
+  ## 上記のitemization_label_length + itemization_labelsepでちょうど2行目がそろう
+  - \setlength{\leftmargini}{2.5em}
+  - \setlength{\leftmarginii}{2.5em}
+  - \setlength{\leftmarginiii}{2.5em}
+  # ----------------------------------------------------------
+  
+  
+  # ----------------------------------------------------------
+  # 図表のキャプション設定
+  ## 行の折り返しはぶら下げ、図表との間隔設定、フォントファミリー
+  - \usepackage{caption} 
+  # 図
+  - \captionsetup[figure]{
+      format = hang,
+      aboveskip = 0truemm,
+      belowskip = -5truemm,
+      font = sf
+    }
+  # 表
+  ## aboveskip：表とキャプションの間（キャプションの下）；belowskip：キャプションとコンテンツの間（キャプションの上）
+  - \captionsetup[table]{
+      format = hang,
+      aboveskip = 1truemm,
+      belowskip = 3truemm,
+      font = sf
+    }
+  
+  ### キャプションの書式設定（jlreq）
+  ## captionパッケージを読み込むと上書きされる
+  # - \jlreqsetup{
+  #     caption_font = {\sffamily},
+  #     caption_label_font = {\sffamily},
+  #     caption_after_label_space = {0em},
+  #     caption_label_format = {#1：\vspace{-8mm}}
+  #   }
+  # ----------------------------------------------------------
+
+  # ----------------------------------------------------------
+  # 図表の位置決め関係
+  - \usepackage{float}
+  # 図表配置を決定するパラメータ：1ページに可能な限り図を入れる 
+  - \renewcommand{\textfraction}{0.001}
+  - \renewcommand\floatpagefraction{0.99}
+  - \setcounter{topnumber}{10}
+  - \setcounter{bottomnumber}{10}
+  - \setcounter{totalnumber}{20}
+  # 図表間の余白
+    #図と文章の間隔など
+    ## ページ上部・下部のフロート間の距離：位置指定が「t」の図表の間の余白
+  - \setlength{\floatsep}{0em}
+    ## ページ上部・下部のフロートと本文との距離：位置指定が「t」の図表の下のテキストとの余白
+  - \setlength{\textfloatsep}{0em}
+    ## 本文の途中に出力されるフロートと本文との距離：位置指定が「h」の上下テキストとの余白
+    ## 位置指定「h」の図が連続する場合は、上下の余白がつながって2倍になる
+    ## 位置指定「h」はページからあふれて次のページ追い出された場合、flotaのみのページとなるようだ
+    ## floatパッケージの位置指定「H」は、常にフロートのみのページにはならないため実質的な図の余白はこのパラメータのみ
+  - \setlength{\intextsep}{1em plus 2em minus 0.2em}
+    ## キャプションの後の余白
+  - \setlength{\belowcaptionskip}{-0.5em}
+
+    # floatのみのページの図の配置
+    ## \@fpbotに伸縮する余白「plus 1fil」を加えることで、図を上詰めにする
+    ## 位置指定「p」の場合や図があふれてfloatのみのページなった場合に関係する：「H」指定の場合はほとんど使わない
+  - \makeatletter
+  - \setlength{\@fptop}{0em}
+  - \setlength{\@fpsep}{\intextsep}
+  - \setlength{\@fpbot}{0em plus 1fill}
+  - \makeatother
+
+  # ----------------------------------------------------------
+
+  # ----------------------------------------------------------
+  # 図表番号をセクション番号＋連番にする
+  - \makeatletter
+    # 式番号の付け方
+  - \renewcommand{\theequation}{\thesection-\arabic{equation}}
+  - \@addtoreset{equation}{section}
+    # 図番号の付け方
+  - \renewcommand{\thefigure}{\thesection-\arabic{figure}}
+  - \@addtoreset{figure}{section}
+    # 表番号の付け方
+  - \renewcommand{\thetable}{\thesection-\arabic{table}}
+  - \@addtoreset{table}{section}
+  - \makeatother
+  # ----------------------------------------------------------
+
+  # ----------------------------------------------------------
+  # ページを横置きにするコマンドを定義：\blandscapeで開始、\elandscapeで戻す
+  # PandocがRmakdownからLatexに変換する際にRmarkdown内にLatex環境があると環境内部を解釈しない
+  # 例えば\begin{landscape}でlandscape環境を作るとその内部では「# 見出し」の部分がLatexのsectionに変換されない
+  # そのためトリックとして\begin{landscape}を「\blandscape」と再定義してLatex環境ではないように見せる
+  - \usepackage{lscape}
+  - \newcommand{\blandscape}{\begin{landscape}}
+  - \newcommand{\elandscape}{\end{landscape}}
+  # ----------------------------------------------------------
+
+  # ----------------------------------------------------------
+  # 段組みの設定：\begin{multicols}{段数}で開始、\end{multicols}で戻す
+  #- \usepackage{multicol}
+  # ----------------------------------------------------------
+
+  # ----------------------------------------------------------
+  # header、footerのカスタマイズ
+  # 余白を調整するとそのままでは本文文字にページ番号などが被る場合がある
+  # fancyhdrパッケージで調整する。複雑なヘッダ、フッタも作成できるが、とりあえず余白との兼ね合いを調整するためだけに読み込み
+  #- \usepackage{fancyhdr}
+  #- \pagestyle{fancy} # ページスタイルを適用
+  #- \lhead{} # ヘッダ左
+  #- \chead{} # ヘッダ中央
+  #- \rhead{} # ヘッダ右・・・いずれも空にする
+  #- \renewcommand{\headrulewidth}{0.0pt} # ヘッダの区切り線を消す
+  #- \cfoot{\thepage} # フッタ中央にページ番号記載
+  # ----------------------------------------------------------
+
+  # ----------------------------------------------------------
+  ## kableExtraに必要なパッケージ読み込み
+  ## 通常はKnit時に自動的に読み込まれるがループ等でrmarkdown::render()から呼ぶ場合に
+  ## 自動ロードできないため書き込んでおく
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \usepackage{array}
+  - \usepackage{multirow}
+  - \usepackage{wrapfig}
+  - \usepackage{float}
+  - \usepackage{colortbl}
+  - \usepackage{pdflscape}
+  - \usepackage{tabu}
+  - \usepackage{threeparttable}
+  - \usepackage{threeparttablex}
+  - \usepackage[normalem]{ulem}
+  - \usepackage[utf8]{inputenc}
+  - \usepackage{makecell}
+  - \usepackage{xcolor}
+  # ----------------------------------------------------------
+  
+  # ----------------------------------------------------------
+  ## kableExtraパッケージで表内の数値の桁そろえを行う設定
+  ## Latexのsiunitxパッケージを利用する
+  - \usepackage{siunitx}
+  ## alignで「d」指定したときにsiunitxで整形するようにする
+  ## !! 設定したalign（ここでは「d」）を使う場合、column_specをその列には使わないこと。列幅は桁数として調整する。
+  ## ブラケット内にsiunitxのオプションを書く。group-separatorは桁区切りのマークなど。
+  - \newcolumntype{d}{S[table-format=3.4, group-separator={,}]}
+  # ----------------------------------------------------------
+  
+  # ----------------------------------------------------------
+  # レイアウト確認：本文に「\layout」を挿入するとレイアウト図を出力
+  #- \usepackage{layout}
+  # ----------------------------------------------------------
+---
+
+
+```{r chunk-setup, include=FALSE}
+# setupチャンクに更新があれば、他チャンク実行時に再読み込みされる
+
+# チャンクの全体設定
+knitr::opts_chunk$set(
+  echo = FALSE, # コードを表示しない
+  warning = FALSE, # 警告を表示しない
+  message = FALSE, # メッセージを表示しない
+  cache = FALSE, # 図のキャッシュ：図をキャッシュしてタイプセット
+
+  fig.pos = "H", # Latexの図配置オプション：「H」で強制固定
+  fig.align = "center", # 図を中央揃え
+  fig.cap = "", # Latex出力でfloatさせるためのトリック
+  out.extra = "", # 同上
+  # fig.cap、out.extraが無いとfloatが設定されない場合がある。
+  # PandocがLatex向けだと判断した場合のみfloatが設定されるようだ。
+  # https://stackoverflow.com/questions/42486617/knitr-ignoring-fig-pos
+  
+  # 図のデフォルトの横幅（概ね一行の幅になるように設定）]
+  # 図は基本的に行幅全体を使って描画し各チャンクではfig.heightやfig.aspで高さを調整するとよい
+  fig.width = 6.69
+)
+
+# 出力フォーマットがPDF（Latex）の場合に埋め込む画像の出力をPDF(ベクター形式)とする
+# 余白をクロップする場合、画像フォーマットごとにクロップ用の外部プログラムが必要（imagemagickなど）
+if (!is.null(knitr::opts_knit$get("rmarkdown.pandoc.to"))) {
+  if (knitr::opts_knit$get("rmarkdown.pandoc.to") %in% c("beamer", "latex")) {
+    # PDF出力の場合はチャンクの描画デバイスをCairoPDFにする
+    # デフォルトのフォントを指定する
+    knitr::opts_chunk$set(dev = "cairo_pdf", dev.args = list(family = "NotoSansCJK-Light"))
+  }
+} else {
+  # PDF以外の時は基本的にPNGとする
+  # PNGの場合、必要に応じて解像度の指定を行う
+  knitr::opts_chunk$set(dpi = 300, dev = "png", dev.args = list(type = "cairo-png", family = "NotoSansCJK-Light"))
+}
+```
+
+---
+# Header
+  ## 見通しをよくするためYAMLヘッダのうちヘッダ情報だけ分離する
+  ## title：2行以上の場合は「|」パイプで書く（1行目はパイプのみ。パイプの後に半角スペース）
+title: |
+  | タイトル
+author: "作成者"
+date: `r format(Sys.time(), '%Y/%m/%d')`
+---
+
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(kableExtra)
+
+
+```
+
+
+

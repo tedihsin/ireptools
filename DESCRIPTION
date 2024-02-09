@@ -1,0 +1,9 @@
+Package: ireptools
+Type: Package
+Title: Provide Utility Tools and Templates for IR Reporting
+Version: 0.1.0
+Authors@R: person("Takashi", "NISHIDE", email = "nishide@rcps.jp", role = c("aut", "cre"))
+Description: IRレポートを作成するうえで便利なテンプレートや関数を提供する
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
