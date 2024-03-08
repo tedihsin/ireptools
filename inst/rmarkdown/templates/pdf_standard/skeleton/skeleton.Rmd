@@ -6,8 +6,6 @@ output:
     number_sections: yes
     toc: false
     toc_depth: 2
-    # 図の余白をクロップしない
-    fig_crop: false
     ## pandocオプション
     # markdown-auto_identifiers：pandocで見出しにID属性がつかないようにする
     #     見出しが連続する場合の設定の際に余分なコマンドが入ると見出しの連続が判定できないため
@@ -313,7 +311,7 @@ header-includes:
   # 図
   - \captionsetup[figure]{
       format = hang,
-      aboveskip = 0truemm,
+      aboveskip = 0.5truemm,
       belowskip = -5truemm,
       font = sf
     }
@@ -527,6 +525,5 @@ library(tidyverse)
 library(kableExtra)
 
 ```
-
 
 
