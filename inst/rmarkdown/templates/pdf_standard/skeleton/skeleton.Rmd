@@ -460,7 +460,7 @@ knitr::opts_chunk$set(
   warning = FALSE, # 警告を表示しない
   message = FALSE, # メッセージを表示しない
   cache = FALSE, # 図のキャッシュ：図をキャッシュしてタイプセット
-
+  
   fig.pos = "H", # Latexの図配置オプション：「H」で強制固定
   fig.align = "center", # 図を中央揃え
   fig.cap = "", # Latex出力でfloatさせるためのトリック
@@ -480,13 +480,35 @@ if (!is.null(knitr::opts_knit$get("rmarkdown.pandoc.to"))) {
   if (knitr::opts_knit$get("rmarkdown.pandoc.to") %in% c("beamer", "latex")) {
     # PDF出力の場合はチャンクの描画デバイスをCairoPDFにする
     # デフォルトのフォントを指定する
-    knitr::opts_chunk$set(dev = "cairo_pdf", dev.args = list(family = "NotoSansCJK-Light"))
+    knitr::opts_chunk$set(dev = "cairo_pdf", dev.args = list(family = "Noto Sans CJK JP"))
+  } else {
+    # PDF以外の時は基本的にPNGとする
+    # PNGの場合、必要に応じて解像度の指定を行う
+    knitr::opts_chunk$set(dpi = 300, dev = "png", dev.args = list(type = "cairo-png", family = "Noto Sans CJK JP"))
   }
 } else {
-  # PDF以外の時は基本的にPNGとする
-  # PNGの場合、必要に応じて解像度の指定を行う
-  knitr::opts_chunk$set(dpi = 300, dev = "png", dev.args = list(type = "cairo-png", family = "NotoSansCJK-Light"))
+  knitr::opts_chunk$set(dpi = 300, dev = "png", dev.args = list(type = "cairo-png", family = "Noto Sans CJK JP"))
 }
+
+# ggplotのデフォルト設定の調整
+## 全体の基準となるフォントファミリとサイズ
+ggplot2::theme_set(
+  ggplot2::theme_get() +
+    ggplot2::theme(text = ggplot2::element_text(family = "Noto Sans CJK JP", size = 9))
+)
+
+# 個別のgeom_*関数のデフォルト値を設定
+## text/labelのフォントファミリとサイズ
+ggplot2::update_geom_defaults(
+  "text",
+  list(family = "Times New Roman", size = 0.282 * 9)
+)
+
+ggplot2::update_geom_defaults(
+  "label",
+  list(family = "Times New Roman", size = 0.282 * 9)
+)
+
 ```
 
 ---
@@ -503,7 +525,6 @@ date: `r format(Sys.time(), '%Y/%m/%d')`
 ```{r setup, include=FALSE}
 library(tidyverse)
 library(kableExtra)
-
 
 ```
 
