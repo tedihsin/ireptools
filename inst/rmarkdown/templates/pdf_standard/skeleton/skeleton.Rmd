@@ -306,6 +306,9 @@ header-includes:
   
   # ----------------------------------------------------------
   # 図表のキャプション設定
+  ## 図・表のラベル
+  - \renewcommand{\figurename}{図}
+  - \renewcommand{\tablename}{表}
   ## 行の折り返しはぶら下げ、図表との間隔設定、フォントファミリー
   - \usepackage{caption} 
   # 図
@@ -525,5 +528,4 @@ library(tidyverse)
 library(kableExtra)
 
 ```
-
 
