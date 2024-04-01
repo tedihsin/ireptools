@@ -14,6 +14,10 @@ output:
     #     強制インデントのパッケージで対応してきたがjlreqの箇条書き設定オプション等とも競合するため変更
     pandoc_args: ['-r', 'markdown-auto_identifiers', '-V', 'indent=true'] 
 
+# hyperrefパッケージのオプション
+hyperrefoptions:
+  - bookmarks = false # PDFを開いたときに「しおり」のサイドバーが開かないようにする
+
 # ドキュメントクラスはjlreqを利用する
 # https://tug.org/docs/latex/jlreq/jlreq-ja.html
 documentclass: jlreq
