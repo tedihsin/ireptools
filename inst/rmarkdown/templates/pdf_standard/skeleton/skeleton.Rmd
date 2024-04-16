@@ -409,9 +409,14 @@ header-includes:
   # header、footerのカスタマイズ
   ## パッケージの読込
   #- \usepackage{fancyhdr}
+  ## ページ内の複数マークを任意に選択するためのパッケージ
+  ## 通常はページ内の指定したレベルの最後の見出しでセットしたマークが取得される
+  #- \usepackage{extramarks}
+  ## -----
   ## ページスタイルをfancyにする
   ## タイトルページ等には適用されないが\thispagestyle{fancy}を当該ページに挿入すると適用される
   #- \pagestyle{fancy}
+  ## -----
   ## 一般的にsection等が呼び出されるとmarkもセットされる
   ## markをセットするコマンドを書き換えて格納する情報を調整する
   ## サブセクションがページ内で完結する場合はヘッダに表示されない：Texの問題（fancyhdrのマニュアルに記載）
@@ -419,11 +424,19 @@ header-includes:
   #- \renewcommand{\sectionmark}[1]{\markboth{\thesection.\ {#1}}{}}
   ## ページのmarkの2番目(rightmark)にサブセクション番号とサブセクションタイトルを追加
   #- \renewcommand{\subsectionmark}[1]{\markright{\thesubsection.\ {#1}}}
-  ## ヘッダ・フッタの左・中央・右の出力内容を記述
+  ## ヘッダの左・中央・右の出力内容を記述
+  ##  # ページ内の最後のマークをヘッダにセット(\lastrightmark・\lastleftmarkと同じ)
   #- \fancyhead[R]{\textsf{\rightmark}} # ヘッダ右に上でセットしたサブセクション名
   #- \fancyhead[L]{\textsf{\leftmark}} # ヘッダ左に上でセットしたセクション名
+  ## -----
+  ##  # ページ内の最初のマークをヘッダにセット
+  #- \fancyhead[R]{\textsf{\firstrightmark}} # ヘッダ右に上でセットしたサブセクション名
+  #- \fancyhead[L]{\textsf{\firstleftmark}} # ヘッダ左に上でセットしたセクション名
+  ## -----
+  ## フッタの左・中央・右の出力内容を記述
   #- \fancyfoot[C]{\thepage} # フッタ中央にページ番号
   #- \fancyfoot[L,R]{} # フッタ左右は空
+  ## -----
   ## それぞれヘッダ、フッタとBodyの境界線の幅
   ## 境界線を削除する倍は値を0にセット
   #- \renewcommand{\headrulewidth}{0.6pt}
