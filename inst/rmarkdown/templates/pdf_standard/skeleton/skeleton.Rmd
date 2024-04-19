@@ -285,20 +285,18 @@ header-includes:
   # ----------------------------------------------------------
   # 箇条書きの記号を変更
   #- \renewcommand{\labelitemi}{■}
-  - \renewcommand{\labelitemii}{$\circ$}
+  ## 各レベルの記号
+  - \renewcommand{\labelitemi}{$\bullet$}
+  - \renewcommand{\labelitemii}{$-$}
+  - \renewcommand{\labelitemiii}{$\circ$}
+  - \renewcommand{\labelitemiv}{$\cdot$}
   # ----------------------------------------------------------
-
 
   # ----------------------------------------------------------
   # 箇条書きの設定
   ## マークダウンで箇条書きを記述するとPandocが\tightlist{}を付与する
   ## 抑制するためには各行の間に1行あければよいが、\tightlistの定義を空にして無効化
   - \def\tightlist{}
-  ## 各レベルの記号
-  - \renewcommand{\labelitemi}{$\bullet$}
-  - \renewcommand{\labelitemii}{$-$}
-  - \renewcommand{\labelitemiii}{$\circ$}
-  - \renewcommand{\labelitemiv}{$\cdot$}
   ## itemization_itemsep = {0.5em} # 要素同士の縦間隔
   ## itemization_label_length = {2em} # 各レベルのインデント幅（インデント＋マーク）
   ## itemization_labelsep = {0.5em} # マークから文字列までの幅
