@@ -537,12 +537,12 @@ ggplot2::theme_set(
 ## text/labelのフォントファミリとサイズ
 ggplot2::update_geom_defaults(
   "text",
-  list(family = "Times New Roman", size = 0.282 * 9)
+  list(family = "Times New Roman", size = 9, size.unit = "pt")
 )
 
 ggplot2::update_geom_defaults(
   "label",
-  list(family = "Times New Roman", size = 0.282 * 9)
+  list(family = "Times New Roman", size = 9, size.unit = "pt")
 )
 
 ```
