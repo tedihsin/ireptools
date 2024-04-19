@@ -298,10 +298,12 @@ header-includes:
   ## 抑制するためには各行の間に1行あければよいが、\tightlistの定義を空にして無効化
   - \def\tightlist{}
   ## itemization_itemsep = {0.5em} # 要素同士の縦間隔
+  ## itemization_beforeafter_space = {0em} # 箇条書き全体の前後の余白：階層間の余白
   ## itemization_label_length = {2em} # 各レベルのインデント幅（インデント＋マーク）
   ## itemization_labelsep = {0.5em} # マークから文字列までの幅
   - \jlreqsetup{
-      itemization_itemsep = {-0.4em},
+      itemization_itemsep = {0em},
+      itemization_beforeafter_space = {0em},
       itemization_label_length = {2em},
       itemization_labelsep = {0.5em},
     }
