@@ -50,14 +50,21 @@ subparagraph: yes
 # ## 文献データを指定
 # bibliography:
 #   - "****.bib"
+
 # # 文中の文献を文献リストにリンクするかどうか
 # link-citations: true
+
 # ## 文献リストや引用のフォーマット（XMLファイル）
 # ## 以下のサイトで編集できる：既存のファイルをアップロードして編集
 # ## https://editor.citationstyles.org/about/
+# ## cslファイルはパッケージに含めているがテンプレート利用時には自動的に展開されない
+# ## cslファイルが必要な場合はRコンソールで以下のコマンドを実行してパッケージからファイルをコピーすること
+# ## > file.copy(system.file("rmarkdown/templates/pdf_standard/resources/bibliography.csl", package = "ireptools"), ".")
 # citation-style: bibliography.csl
+
 # ## 末尾に参考文献リストをつけない場合
 # # suppress-bibliography: true 
+
 # ## 参考文献リストのセクションタイトル（第1レベルの見出しになる）
 # reference-section-title: 参考文献
 
