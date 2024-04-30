@@ -45,6 +45,22 @@ subparagraph: yes
 #   )
 #  })
 
+# ----------------------------------------------------------
+# # 参考文献
+# ## 文献データを指定
+# bibliography:
+#   - "****.bib"
+# # 文中の文献を文献リストにリンクするかどうか
+# link-citations: true
+# ## 文献リストや引用のフォーマット（XMLファイル）
+# ## 以下のサイトで編集できる：既存のファイルをアップロードして編集
+# ## https://editor.citationstyles.org/about/
+# citation-style: bibliography.csl
+# ## 末尾に参考文献リストをつけない場合
+# # suppress-bibliography: true 
+# ## 参考文献リストのセクションタイトル（第1レベルの見出しになる）
+# reference-section-title: 参考文献
+
 header-includes:
   # ----------------------------------------------------------
   # 紙面の余白設定
