@@ -325,12 +325,12 @@ header-includes:
   ## itemization_label_length = {2em} # 各レベルのインデント幅（インデント＋マーク）
   ## itemization_labelsep = {0.5em} # マークから文字列までの幅
   - \jlreqsetup{
-      itemization_itemsep = {0em},
-      itemization_beforeafter_space = {0em},
+      itemization_itemsep = {-0.5em},
+      itemization_beforeafter_space = {i=1em,ii=-0.5em},
       itemization_label_length = {2em},
       itemization_labelsep = {0.5em},
     }
-    
+
   # ぶら下げのインデント量
   ## 上記のitemization_label_length + itemization_labelsepでちょうど2行目がそろう
   - \setlength{\leftmargini}{2.5em}
