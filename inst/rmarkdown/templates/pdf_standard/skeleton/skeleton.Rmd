@@ -105,25 +105,28 @@ header-includes:
   # ----------------------------------------------------------
   # lualatexで日本語フォント等を設定するパッケージを読み込み
   - \usepackage{luatexja-fontspec}
+  
+  ## Noto Font ダウンロード
+  # https://github.com/notofonts/noto-cjk/tree/main/Sans
+  # https://github.com/notofonts/noto-cjk/tree/main/Serif
+  # いずれも「Language-specific OTFs」のJapanese(日本語)をダウンロードしてインストールすること
+  # (!) Variable Fontsはウエイトごとにフォントファイルが分割されていないためフォント名が指定しにくい
+  
   ## 欧文フォント
   # 明朝系
   - \setmainfont[
-      BoldFont = Noto Serif CJK JP Medium,
-      ItalicFont = Noto Serif CJK JP,
-      ItalicFeatures = {FakeSlant=0.33},
-      BoldItalicFont = Noto Serif CJK JP,
-      BoldItalicFeatures = {FakeBold=2, FakeSlant=0.33}
-    ]{Noto Serif CJK JP}
+      BoldFont = Noto Serif Medium,
+      ItalicFont = Noto Serif Italic,
+      BoldItalicFont = Noto Serif Medium Italic,
+    ]{Noto Serif Regular}
 
   # ゴシック系
   #- \setsansfont{Noto Sans CJK JP Light}
   - \setsansfont[
-      BoldFont = Noto Sans CJK JP Medium,
-      ItalicFont = Noto Sans CJK JP,
-      ItalicFeatures = {FakeSlant=0.33},
-      BoldItalicFont = Noto Sans CJK JP,
-      BoldItalicFeatures = {FakeBold=2, FakeSlant=0.33}
-    ]{Noto Sans CJK JP}
+      BoldFont = Noto Sans Medium,
+      ItalicFont = Noto Sans Italic,
+      BoldItalicFont = Noto Sans Medium Italic,
+    ]{Noto Sans Regular}
 
   ## 日本語フォント設定
   # \setmainjfont と \setmainjfontで明朝、ゴシックをそれぞれ設定する
@@ -151,7 +154,7 @@ header-includes:
   - \setmainjfont[
       YokoFeatures = {JFM=jlreq},
       TateFeatures = {JFM=jlreqv},
-      BoldFont = Noto Sans CJK JP,
+      BoldFont = Noto Sans CJK JP Medium,
       ItalicFont = Noto Serif CJK JP,
       ItalicFeatures = {FakeSlant=0.33},
       BoldItalicFont = Noto Serif CJK JP,
