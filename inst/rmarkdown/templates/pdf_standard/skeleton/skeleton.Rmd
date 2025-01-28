@@ -12,7 +12,7 @@ output:
     # indent=true：段落頭のインデントを有効化する
     #     pandocのデフォルトLatexテンプレートでは段落頭のインデントが入らない設定のようだ
     #     強制インデントのパッケージで対応してきたがjlreqの箇条書き設定オプション等とも競合するため変更
-    pandoc_args: ['-r', 'markdown-auto_identifiers', '-V', 'indent=true'] 
+    pandoc_args: ['-r', 'markdown-auto_identifiers', '-V', 'indent=true', '--to', 'custom_latex_writer.lua'] 
 
 # hyperrefパッケージのオプション
 hyperrefoptions:
@@ -33,8 +33,19 @@ classoption:
 
 subparagraph: yes
 
-# Knitボタン押下時のファイル名を修正
-## ファイル名＋日時
+# Knitボタン押下時の挙動を修正
+## チャンクで一時ファイルとして生成したpandocのcustom writerをレンダリング後に削除する
+## その他の挙動はデフォルトのまま
+## コマンドとコマンドの区切りは「;」が必要
+knit: (function(input, ...) {
+  rmarkdown::render(
+    ...,
+    input,
+    envir = globalenv(),
+  );
+  if(file.exists("custom_latex_writer.lua")) unlink("custom_latex_writer.lua")
+ })
+## ファイル名に日時を付与する場合
 # knit: (function(input, ...) {
 #   rmarkdown::render(
 #     input,
@@ -516,7 +527,38 @@ header-includes:
 
 
 ```{r chunk-setup, include=FALSE}
-# setupチャンクに更新があれば、他チャンク実行時に再読み込みされる
+# PandocのLatexテンプレートを加工する
+# Luaスクリプトでcustom writerを作成する
+# pandoc_argsは「--lua-filter」ではなく変換そのものを担当するので「--to」に指定する
+# Template()関数がWriter()関数から自動的に呼ばれる：関数がないとNo Templateエラーになる
+# 　ここでデフォルトのテンプレートを書き換える
+#   jlreqドキュメントクラスと相性が悪いmicrotypeを無効化
+#   LuaLaTexでinputencを読み込むと警告が出るため無効化
+# Writer()関数は標準のlatex Writerを実行して一部コードを改変する
+#   RMarkdownがinputencを読み込むコードを書き込むようなのでコメントアウトする
+# luaスクリプトをファイルとして書き込む
+#   YAMLヘッダのpandoc_argsで書き出したluaファイルを「--to」で指定する
+cat('-- Writer()関数から呼び出されてテンプレートを返す関数
+function Template()
+  -- デフォルトのテンプレートを読み込んで必要な修正を加えて返す
+  local template = pandoc.template.default("latex")
+  local modified_template = template
+            :gsub("\\\\usepackage%[[^\\n]-%]%{microtype%}", "%%%0")
+            :gsub("\\\\UseMicrotypeSet", "%%%0")
+            :gsub("\\\\usepackage%[utf8%]%{inputenc%}", "%%%0")
+  return modified_template
+end
+
+-- Custom Writer関数
+function Writer(doc, options)
+  -- 基本的にはデフォルトのLaTexようWriterをそのまま適用するだけ
+  local latex_content = pandoc.write(doc, "latex", options)
+  
+  -- テンプレートに値を入れた後に必要な修正を行う
+  local latex_content = latex_content:gsub("\\\\usepackage%[utf8%]%{inputenc%}", "%%%0")
+  
+  return latex_content
+end', file = "custom_latex_writer.lua")
 
 # チャンクの全体設定
 knitr::opts_chunk$set(
