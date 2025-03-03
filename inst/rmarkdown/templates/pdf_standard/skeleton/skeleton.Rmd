@@ -325,7 +325,7 @@ header-includes:
   ## 各レベルの記号
   - \renewcommand{\labelitemi}{$\bullet$}
   - \renewcommand{\labelitemii}{$\circ$}
-  - \renewcommand{\labelitemiii}{$\traiangleright$}
+  - \renewcommand{\labelitemiii}{$\rhd$}
   - \renewcommand{\labelitemiv}{$\cdot$}
   # ----------------------------------------------------------
 
@@ -340,7 +340,7 @@ header-includes:
   ## itemization_labelsep = {0.5em} # マークから文字列までの幅
   - \jlreqsetup{
       itemization_itemsep = {-0.5em},
-      itemization_beforeafter_space = {i=1em,ii=-0.5em},
+      itemization_beforeafter_space = {i=1em,ii=-0.4em,iii=-0.4em},
       itemization_label_length = {2em},
       itemization_labelsep = {0.5em},
     }
