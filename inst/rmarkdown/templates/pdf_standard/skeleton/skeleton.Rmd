@@ -89,6 +89,7 @@ header-includes:
       bottom = 20truemm,
       left = 20truemm,
       right = 20truemm,
+      headheight=14pt,
       footskip = 10truemm
     }
   ## classoptionで余白設定する場合のヘッダ・フッタの位置
