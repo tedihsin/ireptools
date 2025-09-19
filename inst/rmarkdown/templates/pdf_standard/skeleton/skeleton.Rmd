@@ -543,21 +543,20 @@ cat('-- Writer()関数から呼び出されてテンプレートを返す関数
 function Template()
   -- デフォルトのテンプレートを読み込んで必要な修正を加えて返す
   local template = pandoc.template.default("latex")
-  local modified_template = template
-            :gsub("\\\\usepackage%[[^\\n]-%]%{microtype%}", "%%%0")
-            :gsub("\\\\UseMicrotypeSet", "%%%0")
-            :gsub("\\\\usepackage%[utf8%]%{inputenc%}", "%%%0")
-  return modified_template
+  return template
 end
 
 -- Custom Writer関数
-function Writer(doc, options)
+function Writer(doc, opts)
   -- 基本的にはデフォルトのLaTexようWriterをそのまま適用するだけ
-  local latex_content = pandoc.write(doc, "latex", options)
+  local latex_content = pandoc.write(doc, "latex", opts)
   
   -- テンプレートに値を入れた後に必要な修正を行う
-  local latex_content = latex_content:gsub("\\\\usepackage%[utf8%]%{inputenc%}", "%%%0")
-  
+  local latex_content = latex_content
+                                :gsub("\\\\usepackage%[[^\\n]-%]%{microtype%}", "%%%0")
+                                :gsub("\\\\UseMicrotypeSet", "%%%0")
+                                :gsub("\\\\usepackage%[utf8%]%{inputenc%}", "%%%0")
+                                
   return latex_content
 end', file = "custom_latex_writer.lua")
 
