@@ -340,8 +340,8 @@ header-includes:
   ## itemization_label_length = {2em} # 各レベルのインデント幅（インデント＋マーク）
   ## itemization_labelsep = {0.5em} # マークから文字列までの幅
   - \jlreqsetup{
-      itemization_itemsep = {-0.5em},
-      itemization_beforeafter_space = {i=1em,ii=-0.4em,iii=-0.4em},
+      itemization_itemsep = {0em},
+      itemization_beforeafter_space = {i=0.5em,ii=-0.4em,iii=-0.4em},
       itemization_label_length = {2em},
       itemization_labelsep = {0.5em},
     }
@@ -364,10 +364,12 @@ header-includes:
   # : 定義・・・・・
   # -----
   # style=unboxed：折り返し行をそろえる設定
-  # labelwidth：ラベルの文字幅, leftmargin：リストの左余白・折り返し行の左側の余白, labelsep：ラベルと定義の間隔
+  # labelindent：ラベル左の余白, labelwidth：ラベルの文字幅, leftmargin：リストの左余白・折り返し行の左側の余白, labelsep：ラベルと定義の間隔
+  # 本文の左側を揃えるためにはlabelindent + labelwidth + labelsep = leftmarginとする
   # itemsep：項目と項目の間隔, parsep：同じ項目内で段落を分けた時の空き
   - \usepackage{enumitem}
-  - \setlist[description]{style=unboxed, labelwidth=5em, leftmargin=6em, labelsep=1em, itemsep=0.8\baselineskip, parsep=0pt}
+  - \setlist[description]{style=unboxed, labelindent=0em, labelwidth=5em, labelsep=1em, leftmargin=6em, itemsep=0\baselineskip, parsep=0pt}
+
   # ----------------------------------------------------------
   
   # ----------------------------------------------------------
