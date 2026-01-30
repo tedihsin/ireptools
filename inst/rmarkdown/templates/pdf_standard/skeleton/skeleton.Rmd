@@ -364,11 +364,21 @@ header-includes:
   # : 定義・・・・・
   # -----
   # style=unboxed：折り返し行をそろえる設定
-  # labelindent：ラベル左の余白, labelwidth：ラベルの文字幅, leftmargin：リストの左余白・折り返し行の左側の余白, labelsep：ラベルと定義の間隔
+  # labelindent：ラベル左の余白, labelwidth：ラベルの文字幅, labelsep：ラベルと定義の間隔
+  # leftmargin：リストの左余白・折り返し行の左側の余白, rightmargin：右側の余白
   # 本文の左側を揃えるためにはlabelindent + labelwidth + labelsep = leftmarginとする
   # itemsep：項目と項目の間隔, parsep：同じ項目内で段落を分けた時の空き
   - \usepackage{enumitem}
-  - \setlist[description]{style=unboxed, labelindent=0em, labelwidth=5em, labelsep=1em, leftmargin=6em, itemsep=0\baselineskip, parsep=0pt}
+  - \setlist[description]{
+      style=unboxed,
+      labelindent=0em,
+      labelwidth=5em,
+      labelsep=1em,
+      leftmargin=6em,
+      rightmargin=0em,
+      itemsep=0\baselineskip,
+      parsep=0pt
+    }
 
   # ----------------------------------------------------------
   
