@@ -628,7 +628,7 @@ if (!is.null(knitr::opts_knit$get("rmarkdown.pandoc.to"))) {
 ## 全体の基準となるフォントファミリとサイズ
 ggplot2::theme_set(
   ggplot2::theme_get() +
-    ggplot2::theme(text = ggplot2::element_text(family = "Noto Sans CJK JP", size = 9))
+    ggplot2::theme(text = ggplot2::element_text(family = "Noto Sans CJK JP", size = 10))
 )
 
 # 個別のgeom_*関数のデフォルト値を設定
