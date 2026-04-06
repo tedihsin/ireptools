@@ -183,6 +183,11 @@ header-includes:
       BoldItalicFont = Noto Sans CJK JP,
       BoldItalicFeatures = {FakeBold=2, FakeSlant=0.33}
     ]{Noto Sans CJK JP}
+
+  ## 和文と欧文の空きの調整
+  # 標準では空きがやや大きいため基準を0ptとして多少の伸び・詰めを許容する
+  - \renewcommand{\jlreqxkanjiskip}{0pt plus 0.1\zw minus 0.02\zw}
+    
   # ----------------------------------------------------------
   
   # ----------------------------------------------------------
