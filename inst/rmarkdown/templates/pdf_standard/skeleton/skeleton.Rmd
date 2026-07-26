@@ -124,20 +124,16 @@ header-includes:
   # https://notofonts.github.io/
   # 明朝系
   - \setmainfont[
-      UprightFont    = * Regular,
-      BoldFont       = * Bold,
-      ItalicFont     = * Italic,
-      BoldItalicFont = * Bold Italic,
+      Weight=400,
+      BoldFeatures = {Weight = 700},
     ]{Noto Serif}
     
   # ゴシック系
   #- \setsansfont{Noto Sans CJK JP Light}
   - \setsansfont[
-      UprightFont    = * Regular,
-      BoldFont       = * Bold,
-      ItalicFont     = * Italic,
-      BoldItalicFont = * Bold Italic,
-    ]{Noto Sans}
+      Weight=400,
+      BoldFeatures = {Weight = 700},
+    ]{Noto Sans}  
 
   ## 日本語フォント設定
   # https://github.com/notofonts/noto-cjk/tree/main/Sans
@@ -172,19 +168,23 @@ header-includes:
       TateFeatures = {JFM=jlreqv},
       BoldFont = {Noto Sans CJK JP},
       BoldFeatures = {Weight = 500},
+      ItalicFont = {Noto Serif CJK JP},
       ItalicFeatures = {FakeSlant = 0.33},
       BoldItalicFont = {Noto Sans CJK JP},
-      BoldItalicFeatures = {Weight = 500, FakeSlant = 0.33}
+      BoldItalicFeatures = {Weight = 500, FakeSlant = 0.33},
     ]{Noto Serif CJK JP}
-    
+
   ## ゴシックフォント
   - \setsansjfont[
       Weight = 400,
       YokoFeatures = {JFM=jlreq},
       TateFeatures = {JFM=jlreqv},
-      BoldFeatures = {Weight = 500},
+      BoldFont = {Noto Sans CJK JP},
+      BoldFeatures = {Weight = 600},
+      ItalicFont = {Noto Sans CJK JP},
       ItalicFeatures = {FakeSlant = 0.33},
-      BoldItalicFeatures = {Weight = 500, FakeSlant = 0.33}
+      BoldItalicFont = {Noto Sans CJK JP},
+      BoldItalicFeatures = {Weight = 600, FakeSlant = 0.33},
     ]{Noto Sans CJK JP}
 
   ## 和文と欧文の空きの調整
