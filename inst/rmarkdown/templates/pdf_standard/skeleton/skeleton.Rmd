@@ -273,22 +273,22 @@ header-includes:
   ### -----
   ## 通常の見出し定義
   - \DeclareBlockHeading{section}{1}{
-      font={\fontsize{12pt}{12pt}\selectfont\sffamily\bfseries},
-      after_label_space = {0.5em},
+      font={\fontsize{11.5pt}{12pt}\selectfont\sffamily},
+      after_label_space = {0em},
       before_lines = {1},
-      after_lines = {0.15},
+      after_lines = {0.2},
     }
   - \DeclareBlockHeading{subsection}{2}{
       font={\fontsize{11pt}{11pt}\selectfont\sffamily},
-      after_label_space = {0.5em},
+      after_label_space = {0em},
       before_lines = {0.7},
-      after_lines = {0.15},
+      after_lines = {0.2},
     }
   - \DeclareBlockHeading{subsubsection}{3}{
       font={\fontsize{11pt}{11pt}\selectfont\sffamily},
-      after_label_space = {0.5em},
+      after_label_space = {0em},
       before_lines = {0.5},
-      after_lines = {0.15},
+      after_lines = {0.2},
     }
   
   ### -----
