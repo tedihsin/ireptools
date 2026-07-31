@@ -120,26 +120,43 @@ header-includes:
   
   ## 欧文フォント
   # Noto Dashbordから「Noto Latin, Greek, Cyrillic（基本のNoto font）」をダウンロードする
-  # Releasesから「Noto Sans」と「Noto Serif」をダウンロードし、「full」または「googlefonts」の「variable-ttf」をインストール
+  # Releasesから「Noto Sans」と「Noto Serif」をダウンロードし、「full」または「googlefonts」をインストール
+  # 必要に応じてバリアブルフォントかスタティックフォントを選択し、以下の設定を調整する。
+  # バリアブルフォントにも対応しているが、一部表示の不具合があるためスタティックフォントの方がトラブルが少ない
   # https://notofonts.github.io/
   # 明朝系
+  # -> Staticフォント用
   - \setmainfont[
-      Weight=400,
-      BoldFeatures = {Weight = 700},
+      UprightFont    = * Regular,
+      BoldFont       = * Bold,
+      ItalicFont     = * Italic,
+      BoldItalicFont = * Bold Italic
     ]{Noto Serif}
+  # -> Variableフォント用
+  # - \setmainfont[
+  #     Weight=400,
+  #     BoldFeatures = {Weight = 700},
+  #   ]{Noto Serif}
     
   # ゴシック系
-  #- \setsansfont{Noto Sans CJK JP Light}
+  # -> Staticフォント用
   - \setsansfont[
-      Weight=400,
-      BoldFeatures = {Weight = 700},
-    ]{Noto Sans}  
+      UprightFont    = * Regular,
+      BoldFont       = * Bold,
+      ItalicFont     = * Italic,
+      BoldItalicFont = * Bold Italic
+    ]{Noto Sans}
+  # -> Variableフォント用
+  # - \setsansfont[
+  #     Weight=400,
+  #     BoldFeatures = {Weight = 700},
+  #   ]{Noto Sans}  
 
   ## 日本語フォント設定
   # https://github.com/notofonts/noto-cjk/tree/main/Sans
   # https://github.com/notofonts/noto-cjk/tree/main/Serif
-  # 「Language-specific Variable Fonts」の日本語OTFをインストールする
-
+  # 「Language-specific」からスタティックフォントかバリアブルフォントを選んでインストール
+  # バリアブルフォントにも対応しているが、一部表示の不具合があるためスタティックフォントの方がトラブルが少ない
   # \setmainjfont と \setmainjfontで明朝、ゴシックをそれぞれ設定する
   ## 例：
   #- \setmainjfont[
@@ -162,30 +179,54 @@ header-includes:
   #    BoldItalicFeatures = {FakeBold=2, FakeSlant=0.33}
   #  ]{BIZ UDMincho Medium}
   ## 明朝フォント
+  # -> Staticフォント用
   - \setmainjfont[
-      Weight = 400,
-      YokoFeatures = {JFM=jlreq},
-      TateFeatures = {JFM=jlreqv},
-      BoldFont = {Noto Sans CJK JP},
-      BoldFeatures = {Weight = 500},
-      ItalicFont = {Noto Serif CJK JP},
+      YokoFeatures   = {JFM=jlreq},
+      TateFeatures   = {JFM=jlreqv},
+      UprightFont    = * Regular,
+      BoldFont       = {Noto Sans CJK JP Medium},
+      ItalicFont     = {Noto Serif CJK JP},
       ItalicFeatures = {FakeSlant = 0.33},
       BoldItalicFont = {Noto Sans CJK JP},
-      BoldItalicFeatures = {Weight = 500, FakeSlant = 0.33},
+      BoldItalicFeatures = {FakeSlant = 0.33}
     ]{Noto Serif CJK JP}
+  # -> Variableフォント用
+  # - \setmainjfont[
+  #     Weight = 400,
+  #     YokoFeatures = {JFM=jlreq},
+  #     TateFeatures = {JFM=jlreqv},
+  #     BoldFont = {Noto Sans CJK JP},
+  #     BoldFeatures = {Weight = 500},
+  #     ItalicFont = {Noto Serif CJK JP},
+  #     ItalicFeatures = {FakeSlant = 0.33},
+  #     BoldItalicFont = {Noto Sans CJK JP},
+  #     BoldItalicFeatures = {Weight = 500, FakeSlant = 0.33},
+  #   ]{Noto Serif CJK JP}
 
   ## ゴシックフォント
+  # -> Staticフォント用
   - \setsansjfont[
-      Weight = 400,
-      YokoFeatures = {JFM=jlreq},
-      TateFeatures = {JFM=jlreqv},
-      BoldFont = {Noto Sans CJK JP},
-      BoldFeatures = {Weight = 600},
-      ItalicFont = {Noto Sans CJK JP},
+      YokoFeatures   = {JFM=jlreq},
+      TateFeatures   = {JFM=jlreqv},
+      UprightFont    = * Regular,
+      BoldFont       = {Noto Sans CJK JP Medium},
+      ItalicFont     = {Noto Sans CJK JP},
       ItalicFeatures = {FakeSlant = 0.33},
-      BoldItalicFont = {Noto Sans CJK JP},
-      BoldItalicFeatures = {Weight = 600, FakeSlant = 0.33},
+      BoldItalicFont = {Noto Sans CJK JP Medium},
+      BoldItalicFeatures = {FakeSlant = 0.33}
     ]{Noto Sans CJK JP}
+  # -> Variableフォント用  
+  # - \setsansjfont[
+  #     Weight = 400,
+  #     YokoFeatures = {JFM=jlreq},
+  #     TateFeatures = {JFM=jlreqv},
+  #     BoldFont = {Noto Sans CJK JP},
+  #     BoldFeatures = {Weight = 600},
+  #     ItalicFont = {Noto Sans CJK JP},
+  #     ItalicFeatures = {FakeSlant = 0.33},
+  #     BoldItalicFont = {Noto Sans CJK JP},
+  #     BoldItalicFeatures = {Weight = 600, FakeSlant = 0.33},
+  #   ]{Noto Sans CJK JP}
 
   ## 和文と欧文の空きの調整
   # 標準では空きがやや大きいため基準を0ptとして多少の伸び・詰めを許容する
