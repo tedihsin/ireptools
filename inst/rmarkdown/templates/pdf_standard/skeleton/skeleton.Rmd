@@ -209,10 +209,10 @@ header-includes:
       YokoFeatures   = {JFM=jlreq},
       TateFeatures   = {JFM=jlreqv},
       UprightFont    = * Regular,
-      BoldFont       = {Noto Sans CJK JP Medium},
+      BoldFont       = {Noto Sans CJK JP Bold},
       ItalicFont     = {Noto Sans CJK JP},
       ItalicFeatures = {FakeSlant = 0.33},
-      BoldItalicFont = {Noto Sans CJK JP Medium},
+      BoldItalicFont = {Noto Sans CJK JP Bold},
       BoldItalicFeatures = {FakeSlant = 0.33}
     ]{Noto Sans CJK JP}
   # -> Variableフォント用  
