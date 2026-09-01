@@ -518,22 +518,25 @@ header-includes:
   # PandocがRmakdownからLatexに変換する際にRmarkdown内にLatex環境があると環境内部を解釈しない
   # 例えば\begin{landscape}でlandscape環境を作るとその内部では「# 見出し」の部分がLatexのsectionに変換されない
   # そのためトリックとして\begin{landscape}を「\blandscape」と再定義してLatex環境ではないように見せる
-  ## 回転方向の調整：デフォルトでは横向ページの左側にページ番号が表示される（左側が縦向時の下）となるのを逆転させる
-  - \usepackage{graphicx}
-  - \usepackage{etoolbox}
   - \usepackage{pdflscape}
-  # % Rotate the page contents by -90° (clockwise)
-  - \makeatletter
-  - \patchcmd{\LS@rot}
-      {\rotatebox{90}}
-      {\rotatebox{-90}}
-      {}{\GenericError{}{Failed to patch \string\LS@rot}{}{}}
-  # % Tell the PDF viewer to rotate the page +90°
-  - \patchcmd{\landscape}
-      {\PLS@Rotate{90}}
-      {\PLS@Rotate{270}}
-      {}{\GenericError{}{Failed to patch \string\landscape}{}{}}
-  - \makeatother
+  
+  ## 回転方向の調整：デフォルトでは横向ページの左側にページ番号が表示される（左側が縦向時の下）となるのを逆転させる
+  ## 両面印刷時に表裏でページ番号の位置が逆転するため注意
+  # - \usepackage{graphicx}
+  # - \usepackage{etoolbox}
+  ## % Rotate the page contents by -90° (clockwise)
+  # - \makeatletter
+  # - \patchcmd{\LS@rot}
+  #     {\rotatebox{90}}
+  #     {\rotatebox{-90}}
+  #     {}{\GenericError{}{Failed to patch \string\LS@rot}{}{}}
+  ## % Tell the PDF viewer to rotate the page +90°
+  # - \patchcmd{\landscape}
+  #     {\PLS@Rotate{90}}
+  #     {\PLS@Rotate{270}}
+  #     {}{\GenericError{}{Failed to patch \string\landscape}{}{}}
+  # - \makeatother
+  
   # RMarkdownようコマンドの設定
   - \newcommand{\blandscape}{\begin{landscape}}
   - \newcommand{\elandscape}{\end{landscape}}
