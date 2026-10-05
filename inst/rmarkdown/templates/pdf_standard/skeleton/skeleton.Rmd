@@ -111,7 +111,7 @@ header-includes:
   # - \setlength{\parindent}{1em}
   
   ## 段落間の余白
-  - \setlength{\parskip}{0.5em}
+  - \setlength{\parskip}{0.3\baselineskip}
   # ----------------------------------------------------------
   
   # ----------------------------------------------------------
@@ -370,38 +370,142 @@ header-includes:
   # ----------------------------------------------------------
 
   # ----------------------------------------------------------
-  # 箇条書きの記号を変更
-  #- \renewcommand{\labelitemi}{■}
-  ## 各レベルの記号
-  - \renewcommand{\labelitemi}{$\bullet$}
-  - \renewcommand{\labelitemii}{$\circ$}
-  - \renewcommand{\labelitemiii}{$\rhd$}
-  - \renewcommand{\labelitemiv}{$\cdot$}
-  # ----------------------------------------------------------
-
-  # ----------------------------------------------------------
-  # 箇条書きの設定
+  # 箇条書き設定
+  - \usepackage{enumitem}
   ## マークダウンで箇条書きを記述するとPandocが\tightlist{}を付与する
   ## 抑制するためには各行の間に1行あければよいが、\tightlistの定義を空にして無効化
   - \def\tightlist{}
-  ## itemization_itemsep = {0.5em} # 要素同士の縦間隔
-  ## itemization_beforeafter_space = {0em} # 箇条書き全体の前後の余白：階層間の余白
-  ## itemization_label_length = {2em} # 各レベルのインデント幅（インデント＋マーク）
-  ## itemization_labelsep = {0.5em} # マークから文字列までの幅
-  - \jlreqsetup{
-      itemization_itemsep = {0em},
-      itemization_beforeafter_space = {i=0.5em,ii=-0.4em,iii=-0.4em},
-      itemization_label_length = {2em},
-      itemization_labelsep = {0.5em},
-    }
 
-  # ぶら下げのインデント量
-  ## 上記のitemization_label_length + itemization_labelsepでちょうど2行目がそろう
-  - \setlength{\leftmargini}{2.5em}
-  - \setlength{\leftmarginii}{2.5em}
-  - \setlength{\leftmarginiii}{2.5em}
+  ### jlreqでの設定：柔軟性を確保するためenumitemを利用する
+  # ## 各レベルの記号
+  # - \renewcommand{\labelitemi}{$\bullet$}
+  # - \renewcommand{\labelitemii}{$\circ$}
+  # - \renewcommand{\labelitemiii}{$\rhd$}
+  # - \renewcommand{\labelitemiv}{$\cdot$}
+  # ## itemization_itemsep = {0.5em} # 要素同士の縦間隔
+  # ## itemization_beforeafter_space = {0em} # 箇条書き全体の前後の余白：階層間の余白
+  # ## itemization_label_length = {2em} # 各レベルのインデント幅（インデント＋マーク）
+  # ## itemization_labelsep = {0.5em} # マークから文字列までの幅
+  # - \jlreqsetup{
+  #     itemization_itemsep = {0em},
+  #     itemization_beforeafter_space = {i=0.5em,ii=-0.4em,iii=-0.4em},
+  #     itemization_label_length = {2em},
+  #     itemization_labelsep = {0.5em},
+  #   }
+  # 
+  # # ぶら下げのインデント量
+  # ## 上記のitemization_label_length + itemization_labelsepでちょうど2行目がそろう
+  # - \setlength{\leftmargini}{2.5em}
+  # - \setlength{\leftmarginii}{2.5em}
+  # - \setlength{\leftmarginiii}{2.5em}
   # ----------------------------------------------------------
   
+  # ----------------------------------------------------------
+  ## パラメータの説明
+  # label= 行頭記号・番号 / labelindent= ラベル位置の字下げ / labelwidth= ラベル領域幅 / labelsep= ラベルと本文の間隔
+  # leftmargin= リスト本文の左余白 / rightmargin= 右余白 / itemindent= 項目1行目の追加字下げ / listparindent= 項目内改段落の字下げ
+  # topsep= リスト前後の余白 / partopsep= 段落先頭で始まる場合の追加余白 / itemsep= 項目間隔 / parsep= 項目内の段落間隔
+  # style= descriptionの配置形式
+
+  # ----------------------------------------------------------
+  # 番号なしリストの設定
+  # 第1レベル
+  - \setlist[itemize, 1]{
+      label=$\bullet$,
+      labelindent=0em,
+      labelwidth=1em,
+      labelsep=0.5em,
+      leftmargin=2em,
+      rightmargin=0em,
+      itemindent=0em,
+      listparindent=0em,
+      topsep=0.5\baselineskip,
+      partopsep=0pt,
+      itemsep=0\baselineskip,
+      parsep=0pt
+    }
+
+  # 第2レベル
+  - \setlist[itemize, 2]{
+      label=$\circ$,
+      labelindent=0em,
+      labelwidth=1em,
+      labelsep=0.5em,
+      leftmargin=2em,
+      rightmargin=0em,
+      itemindent=0em,
+      listparindent=0em,
+      topsep=0\baselineskip,
+      partopsep=0pt,
+      itemsep=0\baselineskip,
+      parsep=0pt
+    }
+
+  # 第3レベル
+  - \setlist[itemize, 3]{
+      label=$\rhd$,
+      labelindent=0em,
+      labelwidth=1em,
+      labelsep=0.5em,
+      leftmargin=2em,
+      rightmargin=0em,
+      itemindent=0em,
+      listparindent=0em,
+      topsep=0\baselineskip,
+      partopsep=0pt,
+      itemsep=0\baselineskip,
+      parsep=0pt
+    }
+  # ----------------------------------------------------------
+  # 番号リストの設定
+  # 第1レベル
+  - \setlist[enumerate, 1]{
+      label=\arabic*.,
+      labelindent=0em,
+      labelwidth=2em,
+      labelsep=0.5em,
+      leftmargin=3em,
+      rightmargin=0em,
+      itemindent=0em,
+      listparindent=0em,
+      topsep=0\baselineskip,
+      partopsep=0pt,
+      itemsep=0\baselineskip,
+      parsep=0pt
+    }
+
+  # 第2レベル
+  - \setlist[enumerate, 2]{
+      label=(\alph*),
+      labelindent=0em,
+      labelwidth=2em,
+      labelsep=0.5em,
+      leftmargin=2.5em,
+      rightmargin=0em,
+      itemindent=0em,
+      listparindent=0em,
+      topsep=0\baselineskip,
+      partopsep=0pt,
+      itemsep=0\baselineskip,
+      parsep=0pt
+    }
+
+  # 第3レベル
+  - \setlist[enumerate, 3]{
+      label=\roman*.,
+      labelindent=0em,
+      labelwidth=2em,
+      labelsep=0.5em,
+      leftmargin=2.5em,
+      rightmargin=0em,
+      itemindent=0em,
+      listparindent=0em,
+      topsep=0\baselineskip,
+      partopsep=0pt,
+      itemsep=0\baselineskip,
+      parsep=0pt
+    }
+
   # ----------------------------------------------------------
   # 定義リストの設定
   ## 以下の形式でラベルと定義を記述する
@@ -411,13 +515,6 @@ header-includes:
   #
   # ラベル2
   # : 定義・・・・・
-  # -----
-  # style=unboxed：折り返し行をそろえる設定
-  # labelindent：ラベル左の余白, labelwidth：ラベルの文字幅, labelsep：ラベルと定義の間隔
-  # leftmargin：リストの左余白・折り返し行の左側の余白, rightmargin：右側の余白
-  # 本文の左側を揃えるためにはlabelindent + labelwidth + labelsep = leftmarginとする
-  # itemsep：項目と項目の間隔, parsep：同じ項目内で段落を分けた時の空き
-  - \usepackage{enumitem}
   - \setlist[description]{
       style=unboxed,
       labelindent=0em,
@@ -715,9 +812,5 @@ options(knitr.kable.NA = "")
 
 
 ```
-
-
-
-
 
 
