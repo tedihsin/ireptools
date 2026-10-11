@@ -411,99 +411,99 @@ header-includes:
   # 番号なしリストの設定
   # 第1レベル
   - \setlist[itemize, 1]{
-      label=$\bullet$,
-      labelindent=0em,
-      labelwidth=1em,
-      labelsep=0.5em,
-      leftmargin=2em,
-      rightmargin=0em,
-      itemindent=0em,
-      listparindent=0em,
-      topsep=0.5\baselineskip,
-      partopsep=0pt,
-      itemsep=0\baselineskip,
-      parsep=0pt
+      label = $\bullet$,
+      labelindent = 0em,
+      labelwidth = 1em,
+      labelsep = 0.5em,
+      leftmargin = 2em,
+      rightmargin = 0em,
+      itemindent = 0em,
+      listparindent = 0em,
+      topsep = 0.5\baselineskip,
+      partopsep = 0pt,
+      itemsep = 0\baselineskip,
+      parsep = 0pt
     }
 
   # 第2レベル
   - \setlist[itemize, 2]{
-      label=$\circ$,
-      labelindent=0em,
-      labelwidth=1em,
-      labelsep=0.5em,
-      leftmargin=2em,
-      rightmargin=0em,
-      itemindent=0em,
-      listparindent=0em,
-      topsep=0\baselineskip,
-      partopsep=0pt,
-      itemsep=0\baselineskip,
-      parsep=0pt
+      label = $\circ$,
+      labelindent = 0em,
+      labelwidth = 1em,
+      labelsep = 0.5em,
+      leftmargin = 2em,
+      rightmargin = 0em,
+      itemindent = 0em,
+      listparindent = 0em,
+      topsep = 0\baselineskip,
+      partopsep = 0pt,
+      itemsep = 0\baselineskip,
+      parsep = 0pt
     }
 
   # 第3レベル
   - \setlist[itemize, 3]{
-      label=$\rhd$,
-      labelindent=0em,
-      labelwidth=1em,
-      labelsep=0.5em,
-      leftmargin=2em,
-      rightmargin=0em,
-      itemindent=0em,
-      listparindent=0em,
-      topsep=0\baselineskip,
-      partopsep=0pt,
-      itemsep=0\baselineskip,
-      parsep=0pt
+      label = $\rhd$,
+      labelindent = 0em,
+      labelwidth = 1em,
+      labelsep = 0.5em,
+      leftmargin = 2em,
+      rightmargin = 0em,
+      itemindent = 0em,
+      listparindent = 0em,
+      topsep = 0\baselineskip,
+      partopsep = 0pt,
+      itemsep = 0\baselineskip,
+      parsep = 0pt
     }
   # ----------------------------------------------------------
   # 番号リストの設定
   # 第1レベル
   - \setlist[enumerate, 1]{
-      label=\arabic*.,
-      labelindent=0em,
-      labelwidth=2em,
-      labelsep=0.5em,
-      leftmargin=3em,
-      rightmargin=0em,
-      itemindent=0em,
-      listparindent=0em,
-      topsep=0\baselineskip,
-      partopsep=0pt,
-      itemsep=0\baselineskip,
-      parsep=0pt
+      label = \arabic*.,
+      labelindent = 0em,
+      labelwidth = 2em,
+      labelsep = 0.5em,
+      leftmargin = 3em,
+      rightmargin = 0em,
+      itemindent = 0em,
+      listparindent = 0em,
+      topsep = 0\baselineskip,
+      partopsep = 0pt,
+      itemsep = 0\baselineskip,
+      parsep = 0pt
     }
 
   # 第2レベル
   - \setlist[enumerate, 2]{
-      label=(\alph*),
-      labelindent=0em,
-      labelwidth=2em,
-      labelsep=0.5em,
-      leftmargin=2.5em,
-      rightmargin=0em,
-      itemindent=0em,
-      listparindent=0em,
-      topsep=0\baselineskip,
-      partopsep=0pt,
-      itemsep=0\baselineskip,
-      parsep=0pt
+      label = (\alph*),
+      labelindent = 0em,
+      labelwidth = 2em,
+      labelsep = 0.5em,
+      leftmargin = 2.5em,
+      rightmargin = 0em,
+      itemindent = 0em,
+      listparindent = 0em,
+      topsep = 0\baselineskip,
+      partopsep = 0pt,
+      itemsep = 0\baselineskip,
+      parsep = 0pt
     }
 
   # 第3レベル
   - \setlist[enumerate, 3]{
-      label=\roman*.,
-      labelindent=0em,
-      labelwidth=2em,
-      labelsep=0.5em,
-      leftmargin=2.5em,
-      rightmargin=0em,
-      itemindent=0em,
-      listparindent=0em,
-      topsep=0\baselineskip,
-      partopsep=0pt,
-      itemsep=0\baselineskip,
-      parsep=0pt
+      label = \roman*.,
+      labelindent = 0em,
+      labelwidth = 2em,
+      labelsep = 0.5em,
+      leftmargin = 2.5em,
+      rightmargin = 0em,
+      itemindent = 0em,
+      listparindent = 0em,
+      topsep = 0\baselineskip,
+      partopsep = 0pt,
+      itemsep = 0\baselineskip,
+      parsep = 0pt
     }
 
   # ----------------------------------------------------------
@@ -516,15 +516,16 @@ header-includes:
   # ラベル2
   # : 定義・・・・・
   - \setlist[description]{
-      font=\sffamily\bfseries,
-      style=multiline,
-      labelindent=0em,
-      labelwidth=5em,
-      labelsep=1em,
-      leftmargin=6em,
-      rightmargin=0em,
-      itemsep=0\baselineskip,
-      parsep=0pt
+      font = \sffamily\bfseries,
+      style = multiline,
+      labelindent = 0em,
+      labelwidth = 5em,
+      labelsep = 1em,
+      leftmargin = 6em,
+      rightmargin = 0em,
+      itemsep = 0\baselineskip,
+      itemindent = 0pt,
+      parsep = 0pt
     }
 
   # ----------------------------------------------------------
