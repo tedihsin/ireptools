@@ -516,7 +516,8 @@ header-includes:
   # ラベル2
   # : 定義・・・・・
   - \setlist[description]{
-      style=unboxed,
+      font=\sffamily\bfseries,
+      style=multiline,
       labelindent=0em,
       labelwidth=5em,
       labelsep=1em,
