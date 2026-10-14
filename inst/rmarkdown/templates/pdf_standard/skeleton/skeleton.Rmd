@@ -703,6 +703,7 @@ header-includes:
   - \usepackage[utf8]{inputenc}
   - \usepackage{makecell}
   - \usepackage{xcolor}
+  - \usepackage{needspace}
   # ----------------------------------------------------------
   
   # ----------------------------------------------------------
