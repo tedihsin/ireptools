@@ -316,22 +316,22 @@ header-includes:
   - \DeclareBlockHeading{section}{1}{
       font={\fontsize{11.5pt}{12pt}\selectfont\sffamily},
       after_label_space = {0em},
-      before_lines = {1},
-      after_lines = {0.2},
+      before_space = {1\baselineskip},
+      after_space = {0.2\baselineskip}
     }
   - \DeclareBlockHeading{subsection}{2}{
       font={\fontsize{11pt}{11pt}\selectfont\sffamily},
       after_label_space = {0em},
-      before_lines = {0.7},
-      after_lines = {0.2},
+      before_space = {0.7\baselineskip},
+      after_space = {0.2\baselineskip}
     }
   - \DeclareBlockHeading{subsubsection}{3}{
       font={\fontsize{11pt}{11pt}\selectfont\sffamily},
       after_label_space = {0em},
-      before_lines = {0.5},
-      after_lines = {0.2},
+      before_space = {0.5\baselineskip},
+      after_space = {0.2\baselineskip}
     }
-  
+    
   ### -----
   ## 見出しを黒帯＋白抜き文字に
   # - \DeclareBlockHeading{section}{1}
